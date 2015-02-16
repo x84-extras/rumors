@@ -26,13 +26,13 @@ MENU_COMMAND_COLOR = get_ini('rumors', 'menu_command_color') or \
 MENU_PROMPT_COLOR = get_ini('rumors', 'menu_prompt_color') or \
     u'black_on_green'
 LIST_BORDER_COLOR = get_ini('rumors', 'list_border_color') or \
-    u'bright_black'
+    u'bold_black'
 LIST_HIGHLIGHT_COLOR = get_ini('rumors', 'list_highlight_color') or \
-    u'bright_white_on_green'
+    u'bold_white_on_green'
 ADD_PROMPT_COLOR = get_ini('rumors', 'add_prompt_color') or \
-    u'bright_white_on_green'
+    u'bold_white_on_green'
 DELETE_PROMPT_COLOR = get_ini('rumors', 'delete_prompt_color') or \
-    u'bright_white_on_green'
+    u'bold_white_on_green'
 
 
 # namedtuple for our menu entries (to be used in render_menu_entries)
