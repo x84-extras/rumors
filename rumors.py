@@ -140,7 +140,7 @@ def del_rumor():
 
     try:
         rumor = int(led.read())
-    except ValueError:
+    except (ValueError, TypeError):
         rumor = None
 
     echo(term.normal)
