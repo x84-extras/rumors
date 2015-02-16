@@ -152,6 +152,7 @@ def main():
                         render_menu_entries)
 
     session, term = getsession(), getterminal()
+    session.activity = u'Browsing rumors'
 
     def refresh():
         """ Refresh the menu. """
