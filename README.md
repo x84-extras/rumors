@@ -12,7 +12,7 @@ subdirectory of your `scriptpath`:
     $ cd /path/to/scripts
 	$ git clone https://github.com/x84-extras/rumors
 
-The rumors script is now being exposed as its own sub-module.
+The rumors script is now being exposed as its own Python module.
 
 When you use `gosub`, reference it like this:
 
