@@ -3,18 +3,25 @@ __author__ = u'haliphax <https://github.com/haliphax>'
 
 # std imports
 import collections
+import os
 
 # local
 from x84.bbs import getsession, getterminal, DBProxy
 from x84.bbs.ini import get_ini
 from x84.bbs.output import echo
 
+MYDIR = os.path.dirname(__file__)
 
 # settings - configured in default.ini [rumors] section
 DEFAULT_RUMOR = get_ini('rumors', 'default_rumor') or \
     u'No rumors; why not add one yourself?'
 ART_FILE = get_ini('rumors', 'art_file') or \
-    u'art/rumors.ans'
+    (u'art/rumors.ans' \
+    if not (os.path.isdir(os.path.join(MYDIR, '.git')) \
+            or os.path.isdir(os.path.join(MYDIR, '_git'))) \
+    else os.path.join(MYDIR, 'art', 'rumors.ans'))
+SHOW_MENU_ENTRIES = get_ini('rumors', 'show_menu_entries',
+                            getter='getboolean')
 MENU_HIGHLIGHT_COLOR = get_ini('rumors', 'menu_highlight_color') or \
     u'bold_green'
 MENU_LOWLIGHT_COLOR = get_ini('rumors', 'menu_lowlight_color') or \
@@ -157,21 +164,24 @@ def main():
     def refresh():
         """ Refresh the menu. """
 
-        colors = {'highlight': getattr(term, MENU_HIGHLIGHT_COLOR),
-                  'lowlight': getattr(term, MENU_LOWLIGHT_COLOR)}
-        entries = [
-            MenuItem(inp_key=u'v', text=u'view rumors'),
-            MenuItem(inp_key=u'a', text=u'add a rumor'),
-            MenuItem(inp_key=u'q', text=u'quit to main'),
-        ]
-
-        if session.user.is_sysop:
-            entries.append(MenuItem(inp_key=u'd', text=u'delete a rumor'))
-
         echo(term.clear)
         top_margin = display_banner(ART_FILE) + 1
         echo(u'\r\n')
-        echo(render_menu_entries(term, top_margin, entries, colors))
+
+        if SHOW_MENU_ENTRIES:
+            colors = {'highlight': getattr(term, MENU_HIGHLIGHT_COLOR),
+                      'lowlight': getattr(term, MENU_LOWLIGHT_COLOR)}
+            entries = [
+                MenuItem(inp_key=u'v', text=u'view rumors'),
+                MenuItem(inp_key=u'a', text=u'add a rumor'),
+                MenuItem(inp_key=u'q', text=u'quit to main'),
+            ]
+
+            if session.user.is_sysop:
+                entries.append(MenuItem(inp_key=u'd', text=u'delete a rumor'))
+
+            echo(render_menu_entries(term, top_margin, entries, colors))
+
         echo(u'{0}[{1}]: {2}'.format(term.move_x(max(term.width / 2 - 40,
                                                      0))
                                      if term.width > 80 else u'',
