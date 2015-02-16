@@ -20,6 +20,22 @@ When you use `gosub`, reference it like this:
 gosub('rumors/rumors')
 ```
 
+#### A step further: submodules
+
+If your `scriptpath` is already a git repo unto itself, then you can make it
+very easy to stay up to date with various x/84 mods if you add them as
+*git submodules*:
+
+    $ cd /path/to/scripts
+	$ git submodule add https://github.com/x84-extras/rumors rumors
+
+It clones the repo just like `git clone` would do. However, it's been flagged
+as a *submodule*, and so the batch commands that act on submodules can now
+be used to do things like update all of your submodules at once:
+
+    $ cd /path/to/scripts
+	$ git submodule update --init --remote --recursive
+
 ### As plain files
 
 You don't have to use git to use this script. Simply download the raw files
