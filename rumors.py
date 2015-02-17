@@ -79,7 +79,7 @@ def add_rumor():
         with rumordb:
             key = 1
             if len(rumordb):
-                key = int(max([key for key in rumordb.keys()])) + 1
+                key = int(max(rumordb.keys())) + 1
             rumordb['%d' % key] = rumor
 
 
