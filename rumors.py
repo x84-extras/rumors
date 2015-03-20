@@ -219,11 +219,11 @@ def main():
             if inp:
                 inp = inp.lower()
 
-            if inp == u'a':
-                add_rumor()
-            elif inp == u'v':
-                view_rumors()
-            elif inp == u'd':
-                del_rumor()
-            elif inp == u'q':
-                return
+                if inp == u'a':
+                    add_rumor()
+                elif inp == u'v':
+                    view_rumors()
+                elif inp == u'd':
+                    del_rumor()
+                elif inp == u'q':
+                    return
