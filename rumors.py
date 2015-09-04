@@ -104,7 +104,7 @@ def view_rumors():
             return False
 
         contents = [(key, '{key}) {rumor}'.format(key=key, rumor=rumordb[key]))
-                    for key in sorted(rumordb.keys())]
+                    for key in sorted(map(int, rumordb.keys()))]
         lbar.update(contents)
         echo(u''.join([lbar.border(), lbar.refresh()]))
 
