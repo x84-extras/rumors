@@ -133,7 +133,7 @@ def del_rumor():
         term.inkey()
         return
 
-    led = LineEditor(width=len(str(max(rumordb.keys()))),
+    led = LineEditor(width=len(str(max([int(k) for k in rumordb.keys()]))),
                      colors={'highlight':
                              getattr(term, DELETE_PROMPT_COLOR)})
     echo(u''.join([term.move_x(max(term.width / 2 - 40, 0)), 'Delete rumor: ',
